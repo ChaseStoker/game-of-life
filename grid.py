@@ -10,11 +10,17 @@ class Grid:
         self.block_size = self.settings.block_size 
 
 
-    def update_cell(self, mouse_pos):
+    def spawn(self, mouse_pos):
         x, y = mouse_pos
         col = x//self.block_size
         row = y//self.block_size
-        self.grid[row][col] = not self.grid[row][col]
+        self.grid[row][col] = True
+
+    def kill(self, mouse_pos):
+        x, y = mouse_pos
+        col = x//self.block_size
+        row = y//self.block_size
+        self.grid[row][col] = False
 
 
     def update_grid(self):

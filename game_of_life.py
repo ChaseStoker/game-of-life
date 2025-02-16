@@ -10,6 +10,8 @@ class GameOfLife:
         self.settings = Settings()
         self.running = True
         self.simulation = False
+        self.spawning = False
+        self.killing = False
 
         self.screen = pygame.display.set_mode(
             (self.settings.screen_width, self.settings.screen_height))
@@ -27,7 +29,13 @@ class GameOfLife:
     def run_game(self):
         while self.running:
             self._check_events()
-        
+
+            if self.spawning:
+                self.grid.spawn(pygame.mouse.get_pos())
+
+            if self.killing:
+                self.grid.kill(pygame.mouse.get_pos())
+
             self.screen.fill("black")
 
             if self.simulation:
@@ -46,11 +54,15 @@ class GameOfLife:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                self.grid.update_cell(event.pos)
-            if event.type == pygame.KEYDOWN:
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                self.spawning = True
+            elif event.type == pygame.MOUSEBUTTONUP:
+                self.spawning = False
+            elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     self.simulation = not self.simulation
+
+
 
 
 if __name__=="__main__":
