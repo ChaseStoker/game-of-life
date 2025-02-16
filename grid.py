@@ -5,9 +5,12 @@ class Grid:
     def __init__(self, screen, settings):
         self.screen = screen
         self.settings = settings
-        self.grid = [[False for _ in range(self.settings.cols)] for _ in range(self.settings.rows)]
+        self.reset_grid()
         self.size = (self.settings.rows, self.settings.cols)
         self.block_size = self.settings.block_size 
+
+    def reset_grid(self):
+        self.grid = [[False for _ in range(self.settings.cols)] for _ in range(self.settings.rows)]
 
 
     def spawn(self, mouse_pos):
@@ -32,7 +35,7 @@ class Grid:
                 CELL_ALIVE = self.grid[row][col]
                 if CELL_ALIVE and num_neigbours in [2, 3]:
                     next_grid[row][col] = True
-                elif not CELL_ALIVE and num_neigbours == 3:
+                elif not CELL_ALIVE and num_neigbours in [2, 3]:
                     next_grid[row][col] = True
         self.grid = next_grid
 

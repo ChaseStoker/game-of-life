@@ -48,7 +48,6 @@ class GameOfLife:
             self.clock.tick(self.tick_rate)
 
         pygame.quit()
-
             
     def _check_events(self):
         for event in pygame.event.get():
@@ -61,8 +60,11 @@ class GameOfLife:
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     self.simulation = not self.simulation
+                elif event.key == pygame.K_r:
+                    self._reset_grid()
 
-
+    def _reset_grid(self):
+        self.grid.reset_grid()
 
 
 if __name__=="__main__":
