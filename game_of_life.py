@@ -61,7 +61,7 @@ class GridEvolution:
 
 # pygame setup
 pygame.init()
-width, height = 1000, 1000
+width, height = 1500, 1000
 block_size = 10
 cols =int(width/block_size)
 rows = int(height/block_size)
